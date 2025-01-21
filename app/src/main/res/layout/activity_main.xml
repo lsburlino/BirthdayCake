@@ -42,6 +42,11 @@
             android:layout_height="wrap_content"
             android:text="HOORAY!!" />
 
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frosting"/>
+
         <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
