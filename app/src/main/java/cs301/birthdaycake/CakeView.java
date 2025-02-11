@@ -17,6 +17,8 @@ public class CakeView extends SurfaceView {
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
 
+    private cakeModel mod;
+
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
         and adapting to different tablets' screen sizes and resolutions.  I've deliberately
@@ -62,32 +64,55 @@ public class CakeView extends SurfaceView {
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
+        mod = new cakeModel();
     }
 
+    public cakeModel getCakeModel(){
+        return mod;
+    }
     /**
      * draws a candle at a specified position.  Important:  the left, bottom coordinates specify
      * the position of the bottom left corner of the candle
      */
     public void drawCandle(Canvas canvas, float left, float bottom) {
-        int offset = 200;
-        canvas.drawRect(left-offset, bottom - candleHeight, left-offset + candleWidth, bottom, candlePaint);
-        canvas.drawRect(left+offset, bottom - candleHeight, left+offset + candleWidth, bottom, candlePaint);
-        //draw the outer flame
-        float flameCenterX = left + candleWidth/2;
-        float flameCenterY = bottom - wickHeight - candleHeight - outerFlameRadius/3;
-        canvas.drawCircle(flameCenterX+offset, flameCenterY, outerFlameRadius, outerFlamePaint);
-        canvas.drawCircle(flameCenterX-offset, flameCenterY, outerFlameRadius, outerFlamePaint);
+        if (this.mod.hasCandles) {
+            int offset = 200;
 
-        //draw the inner flame
-        flameCenterY += outerFlameRadius/3;
-        canvas.drawCircle(flameCenterX-offset, flameCenterY, innerFlameRadius, innerFlamePaint);
-        canvas.drawCircle(flameCenterX+offset, flameCenterY, innerFlameRadius, innerFlamePaint);
-        //draw the wick
-        float wickLeft = left + candleWidth/2 - wickWidth/2;
-        float wickTop = bottom - wickHeight - candleHeight;
-        canvas.drawRect(wickLeft-offset, wickTop, wickLeft + wickWidth - offset, wickTop + wickHeight, wickPaint);
-        canvas.drawRect(wickLeft + offset, wickTop, wickLeft + wickWidth + offset, wickTop + wickHeight, wickPaint);
+            for (int i = 0; i < this.mod.numCandles; i++){
+                int candleX = (int) (left + (i-(this.mod.numCandles-1)/2)*offset);
+                canvas.drawRect(candleX, bottom - candleHeight, candleX + candleWidth, bottom, candlePaint);
+                if (this.mod.isLit) {
+                    //draw the outer flame
+                    float flameCenterX = candleX + candleWidth / 2;
+                    float flameCenterY = bottom - wickHeight - candleHeight - outerFlameRadius / 3;
+                    canvas.drawCircle(flameCenterX, flameCenterY, outerFlameRadius, outerFlamePaint);
 
+                    flameCenterY += outerFlameRadius / 3;
+                    canvas.drawCircle(flameCenterX, flameCenterY, innerFlameRadius, innerFlamePaint);
+                }
+                //draw the wick
+                float wickLeft = candleX + candleWidth / 2 - wickWidth / 2;
+                float wickTop = bottom - wickHeight - candleHeight;
+                canvas.drawRect(wickLeft, wickTop, wickLeft + wickWidth, wickTop + wickHeight, wickPaint);
+            }
+//            if (this.mod.isLit) {
+//                //draw the outer flame
+//                float flameCenterX = left + candleWidth / 2;
+//                float flameCenterY = bottom - wickHeight - candleHeight - outerFlameRadius / 3;
+//                canvas.drawCircle(flameCenterX + offset, flameCenterY, outerFlameRadius, outerFlamePaint);
+//                canvas.drawCircle(flameCenterX - offset, flameCenterY, outerFlameRadius, outerFlamePaint);
+//
+//                //draw the inner flame
+//                flameCenterY += outerFlameRadius / 3;
+//                canvas.drawCircle(flameCenterX - offset, flameCenterY, innerFlameRadius, innerFlamePaint);
+//                canvas.drawCircle(flameCenterX + offset, flameCenterY, innerFlameRadius, innerFlamePaint);
+//            }
+//            //draw the wick
+//            float wickLeft = left + candleWidth / 2 - wickWidth / 2;
+//            float wickTop = bottom - wickHeight - candleHeight;
+//            canvas.drawRect(wickLeft - offset, wickTop, wickLeft + wickWidth - offset, wickTop + wickHeight, wickPaint);
+//            canvas.drawRect(wickLeft + offset, wickTop, wickLeft + wickWidth + offset, wickTop + wickHeight, wickPaint);
+        }
     }
 
     /**

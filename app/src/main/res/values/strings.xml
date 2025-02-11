@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BirthdayCake</string>
+    <string name="hooray">HOORAY!!</string>
+    <string name="yay">yay...</string>
 </resources>
