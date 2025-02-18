@@ -16,6 +16,7 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    Paint textPaint = new Paint();
 
     private cakeModel mod;
 
@@ -62,7 +63,9 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
-
+        textPaint.setColor(0xFFFF0000);
+        textPaint.setTextSize(90);
+        textPaint.setTextAlign(Paint.Align.RIGHT);
         setBackgroundColor(Color.WHITE);  //better than black default
 
         mod = new cakeModel();
@@ -160,6 +163,8 @@ public class CakeView extends SurfaceView {
         drawCandle(canvas, cakeLeft + cakeWidth/2 - candleWidth/2, cakeTop);
 
         drawBalloon(canvas);
+
+        canvas.drawText("("+this.mod.Xval +","+this.mod.Yval+")", 1900,600,textPaint);
 
     }//onDraw
 
