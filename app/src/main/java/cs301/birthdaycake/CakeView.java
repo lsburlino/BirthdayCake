@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 
 public class CakeView extends SurfaceView {
@@ -16,6 +17,9 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    Paint checker1 = new Paint();
+    Paint checker2 = new Paint();
+
     Paint textPaint = new Paint();
 
     private cakeModel mod;
@@ -36,6 +40,7 @@ public class CakeView extends SurfaceView {
     public static final float wickWidth = 6.0f;
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
+    public static final float checkerSize = 50.0f;
 
 
 
@@ -63,6 +68,11 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        checker1.setColor(0xffff50df);
+        checker1.setStyle(Paint.Style.FILL);
+        checker2.setColor(Color.BLACK);
+        checker2.setStyle(Paint.Style.FILL);
+
         textPaint.setColor(0xFFFF0000);
         textPaint.setTextSize(90);
         textPaint.setTextAlign(Paint.Align.RIGHT);
@@ -127,6 +137,13 @@ public class CakeView extends SurfaceView {
         canvas.drawOval(this.mod.xTouch, this.mod.yTouch, this.mod.xTouch+ width, this.mod.yTouch+height, cakePaint);
     }//drawBalloon
 
+    public void drawCheckerboard (Canvas canvas){
+        canvas.drawRect(this.mod.touchX-checkerSize, this.mod.touchY-checkerSize, this.mod.touchX, this.mod.touchY, checker1);
+        canvas.drawRect(this.mod.touchX, this.mod.touchY-checkerSize, this.mod.touchX+checkerSize, this.mod.touchY, checker2);
+        canvas.drawRect(this.mod.touchX-checkerSize, this.mod.touchY, this.mod.touchX, this.mod.touchY+checkerSize, checker2);
+        canvas.drawRect(this.mod.touchX, this.mod.touchY, this.mod.touchX+checkerSize, this.mod.touchY+checkerSize, checker1);
+    }//drawCheckerboard
+
     /**
      * onDraw is like "paint" in a regular Java program.  While a Canvas is
      * conceptually similar to a Graphics in javax.swing, the implementation has
@@ -165,6 +182,8 @@ public class CakeView extends SurfaceView {
         drawBalloon(canvas);
 
         canvas.drawText("("+this.mod.Xval +","+this.mod.Yval+")", 1900,600,textPaint);
+
+        drawCheckerboard(canvas);
 
     }//onDraw
 
