@@ -72,7 +72,6 @@ public class CakeView extends SurfaceView {
         checker1.setStyle(Paint.Style.FILL);
         checker2.setColor(Color.BLACK);
         checker2.setStyle(Paint.Style.FILL);
-
         textPaint.setColor(0xFFFF0000);
         textPaint.setTextSize(90);
         textPaint.setTextAlign(Paint.Align.RIGHT);
@@ -138,10 +137,10 @@ public class CakeView extends SurfaceView {
     }//drawBalloon
 
     public void drawCheckerboard (Canvas canvas){
-        canvas.drawRect(this.mod.touchX-checkerSize, this.mod.touchY-checkerSize, this.mod.touchX, this.mod.touchY, checker1);
-        canvas.drawRect(this.mod.touchX, this.mod.touchY-checkerSize, this.mod.touchX+checkerSize, this.mod.touchY, checker2);
-        canvas.drawRect(this.mod.touchX-checkerSize, this.mod.touchY, this.mod.touchX, this.mod.touchY+checkerSize, checker2);
-        canvas.drawRect(this.mod.touchX, this.mod.touchY, this.mod.touchX+checkerSize, this.mod.touchY+checkerSize, checker1);
+        canvas.drawRect(this.mod.xTouch-checkerSize, this.mod.yTouch-checkerSize, this.mod.xTouch, this.mod.yTouch, checker1);
+        canvas.drawRect(this.mod.xTouch, this.mod.yTouch-checkerSize, this.mod.xTouch+checkerSize, this.mod.yTouch, checker2);
+        canvas.drawRect(this.mod.xTouch-checkerSize, this.mod.yTouch, this.mod.xTouch, this.mod.yTouch+checkerSize, checker2);
+        canvas.drawRect(this.mod.xTouch, this.mod.yTouch, this.mod.xTouch+checkerSize, this.mod.yTouch+checkerSize, checker1);
     }//drawCheckerboard
 
     /**
@@ -181,7 +180,7 @@ public class CakeView extends SurfaceView {
 
         drawBalloon(canvas);
 
-        canvas.drawText("("+this.mod.Xval +","+this.mod.Yval+")", 1900,600,textPaint);
+        canvas.drawText("("+this.mod.xTouch +","+this.mod.yTouch+")", 1900,600,textPaint);
 
         drawCheckerboard(canvas);
 
