@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
         SeekBar sb1 = findViewById(R.id.sb1);
         sb1.setOnSeekBarChangeListener(cController);
+
+        LinearLayout touch = findViewById(R.id.touchey);
+        touch.setOnTouchListener(cController);
 
     }
     public void goodbye(View button){
