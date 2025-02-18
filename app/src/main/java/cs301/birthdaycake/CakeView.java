@@ -38,6 +38,7 @@ public class CakeView extends SurfaceView {
 
 
 
+
     /**
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
      * anyway to initialize the member variables
@@ -115,6 +116,14 @@ public class CakeView extends SurfaceView {
         }
     }
 
+
+    public void drawBalloon(Canvas canvas)
+    {
+        float width = 50;
+        float height = 80;
+        canvas.drawOval(this.mod.xTouch, this.mod.yTouch, this.mod.xTouch+ width, this.mod.yTouch+height, cakePaint);
+    }//drawBalloon
+
     /**
      * onDraw is like "paint" in a regular Java program.  While a Canvas is
      * conceptually similar to a Graphics in javax.swing, the implementation has
@@ -149,6 +158,8 @@ public class CakeView extends SurfaceView {
 
         //Now a candle in the center
         drawCandle(canvas, cakeLeft + cakeWidth/2 - candleWidth/2, cakeTop);
+
+        drawBalloon(canvas);
 
     }//onDraw
 

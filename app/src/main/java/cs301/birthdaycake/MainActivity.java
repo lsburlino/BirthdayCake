@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         SeekBar sb1 = findViewById(R.id.sb1);
         sb1.setOnSeekBarChangeListener(cController);
 
+        cakeView.setOnTouchListener(cController);
+
     }
     public void goodbye(View button){
         Log.i("button", "Goodbye") ;
